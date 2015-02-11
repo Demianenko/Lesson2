@@ -4,7 +4,7 @@ public interface MyList {
     int     size();
     boolean isEmpty();
     Object  get(int i);
-    void    remove(int i);
+    Object    remove(int i);
     void    clear();
     boolean contains(Object o);
 }

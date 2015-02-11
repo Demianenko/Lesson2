@@ -81,11 +81,13 @@ public class MyArrayList implements MyList {
     }
 
     @Override
-    public void remove(int poss) {
+    public Object remove(int poss) {
         checkBounds(poss);
+        Object temp = elements[poss];
         System.arraycopy(elements,poss+1,elements,poss,elements.length-poss-1);
         internalSize--;
         checkDescend();
+        return temp;
     }
 
     public void remove() {
