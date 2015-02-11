@@ -6,21 +6,39 @@ public class MyArrayList implements MyList {
     private int internalSize = 0;
     private Object[] elements = new Object[FIRST_SIZE];
 
-    private void doRise() {
+    private void checkRise() {
         if(internalSize >= elements.length) {
             elements = riceLength(elements);
         }
     }
-    private  void doDescend() {
+    private  void checkDescend() {
         if(internalSize*2 <= elements.length) {
             elements = descendLength(elements);
+        }
+    }
+    private Object[] riceLength(Object[] src) {
+        int newLength = (int)(src.length * GOLD_NUMB);
+        Object[] dest = new Object[newLength];
+        System.arraycopy(src,0,dest,0,src.length);
+        return  dest;
+    }
+    private Object[]  descendLength (Object[] src) {
+        int newLength = (int)(internalSize * GOLD_NUMB);
+        Object[] dest = new Object[newLength];
+        System.arraycopy(src,0,dest,0,src.length);
+        return  dest;
+    }
+
+    private void checkBounds(int poss) {
+        if (poss < 0 | poss >= internalSize ) {
+            throw new IndexOutOfBoundsException("А туда ли ты попал своим индексом?");
         }
     }
     @Override
     public void add(Object o) {
         elements[internalSize] = o;
         internalSize++;
-        doRise();
+        checkRise();
     }
 
     public void add(Object o, int poss) {
@@ -28,7 +46,7 @@ public class MyArrayList implements MyList {
         System.arraycopy(elements,poss,elements,poss+1,internalSize-poss-1);
         set(o,poss);
         internalSize++;
-        doRise();
+        checkRise();
     }
 
     public void set (Object o, int poss) {
@@ -67,12 +85,12 @@ public class MyArrayList implements MyList {
         checkBounds(poss);
         System.arraycopy(elements,poss+1,elements,poss,elements.length-poss-1);
         internalSize--;
-        doDescend();
+        checkDescend();
     }
 
     public void remove() {
         internalSize--;
-        doDescend();
+        checkDescend();
     }
 
     @Override
@@ -94,27 +112,9 @@ public class MyArrayList implements MyList {
     public String toString() {
         String toString ="";
         for (int i = 0; i < this.internalSize; i++) {
-            toString += elements[i] + " internalSize= " + internalSize + " length=" + elements.length +"\n";
+            toString += elements[i]+" ";
         }
         return toString;
-    }
-    private Object[] riceLength(Object[] src) {
-        int newLength = (int)(src.length * GOLD_NUMB);
-        Object[] dest = new Object[newLength];
-        System.arraycopy(src,0,dest,0,src.length);
-        return  dest;
-    }
-    private Object[]  descendLength (Object[] src) {
-        int newLength = (int)(internalSize * GOLD_NUMB);
-        Object[] dest = new Object[newLength];
-        System.arraycopy(src,0,dest,0,src.length);
-        return  dest;
-    }
-
-    private void checkBounds(int poss) {
-        if (poss < 0 | poss >= internalSize ) {
-            throw new IndexOutOfBoundsException("А туда ли ты попал своим индексом?");
-        }
     }
 
 }
