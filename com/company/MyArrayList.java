@@ -2,8 +2,9 @@ package com.company;
 
 public class MyArrayList implements MyList {
     private static final float GOLD_NUMB = 1.62f;
+    private static final int FIRST_SIZE = 16;
     private int internalSize = 0;
-    private Object[] elements = new Object[16];
+    private Object[] elements = new Object[FIRST_SIZE];
 
     private void doRise() {
         if(internalSize >= elements.length) {
