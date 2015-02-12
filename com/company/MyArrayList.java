@@ -41,17 +41,29 @@ public class MyArrayList implements MyList {
         checkRise();
     }
 
-    public void add(Object o, int poss) {
+    @Override
+    public int insert (int poss, Object o) {
         checkBounds(poss);
         System.arraycopy(elements,poss,elements,poss+1,internalSize-poss-1);
-        set(o,poss);
+        put(poss,o);
         internalSize++;
         checkRise();
+        return 0;
     }
 
-    public void set (Object o, int poss) {
+    public void put(int poss, Object o) {
         checkBounds(poss);
         elements[poss] = o;
+    }
+
+    @Override
+    public int indexOf(Object o) {
+        for(int i =0; i < internalSize; i++) {
+            if (elements[i] == o) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     @Override

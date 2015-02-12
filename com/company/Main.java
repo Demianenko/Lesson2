@@ -1,8 +1,5 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -19,9 +16,9 @@ public class Main {
         simpleArLi.remove();
         System.out.println(simpleArLi);
         System.out.println(simpleArLi.contains(1));
-        simpleArLi.set("ff",3);
+        simpleArLi.put(3, "FF");
         System.out.println(simpleArLi);
-        simpleArLi.add("LL", 0);
+        simpleArLi.insert(0,"hh");
         System.out.println(simpleArLi);
     }
 }
